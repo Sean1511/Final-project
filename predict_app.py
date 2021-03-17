@@ -4,7 +4,6 @@ import base64
 import io
 from random import randint
 import tensorflow as tf
-from PIL import Image
 import numpy as np
 from flask import request
 from flask import jsonify
