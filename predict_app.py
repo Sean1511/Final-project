@@ -3,6 +3,7 @@ import cv2
 import base64
 import io
 from random import randint
+from PIL import Image
 import tensorflow as tf
 import numpy as np
 from flask import request
