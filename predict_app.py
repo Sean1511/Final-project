@@ -3,7 +3,6 @@ import cv2
 import base64
 import io
 from random import randint
-from PIL import Image
 import tensorflow as tf
 import numpy as np
 from flask import request
@@ -62,9 +61,7 @@ def rand_patch(image):
     return patch
 
 
-def predict_image(im_name, model):
-    image = cv2.cvtColor(np.asarray(im_name), cv2.COLOR_RGB2BGR)
-    # image = cv2.imread(im_name, 0) # read image
+def predict_image(image, model):
     patches = image_segment(image)   # extract patches from image
     if len(patches) % 2 == 0 : patches.append(rand_patch(image)) # if number of patches is even, add 1 random patch to make it odd
     x_test = []
@@ -97,10 +94,13 @@ print(" * Model loaded!")
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    message = request.get_json(force=True)
+    message = request.get_json(force=True) # Get image from user
     encoded = message['image']
-    decoded = base64.b64decode(encoded)
-    image = Image.open(io.BytesIO(decoded))
+    decoded = base64.b64decode(encoded) # decode data
+    image_stream = io.BytesIO(decoded)
+    image_stream.seek(0)
+    file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
+    image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
     prediction = predict_image(image, model)
 
     response = {
