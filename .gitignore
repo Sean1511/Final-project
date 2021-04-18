@@ -152,4 +152,6 @@ clean-data
 .history/
 
 # ignore models
-models
+models/
+pic/
+tests/
