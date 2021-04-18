@@ -151,5 +151,5 @@ clean-data
 # Local History for Visual Studio Code
 .history/
 
-# ignore model
-xception_segmentation_split_40ep.h5
+# ignore models
+models
