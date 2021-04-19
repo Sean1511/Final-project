@@ -130,8 +130,8 @@ def predict():
         'prediction': {
             'Male': prediction[0],
             'Female': prediction[1], 
-            'patches_count':prediction[2],
-            'classification':prediction[3]
+            'patches_count': prediction[2],
+            'classification': prediction[3]
         }
     }
 

@@ -104,9 +104,30 @@
   }
 
   #left{
+    position: absolute;
+    left: 900px;
+    top:200px;
+    width: 450px;
+  }
+
+  #models{
+    color: black;
     position: relative;
-    left: 1000px;
-    bottom:250px;
+    left:10px;
+  }
+
+  #predict-button{
+    color:black;
+  }
+
+  #contactus{
+    position: relative;
+    left: 160px;
+  }
+
+  #sendBtn{
+    position: relative;
+    right: 270px;
   }
 
   .navbar {
@@ -284,11 +305,11 @@
     <div class="buttons">
       <p id="upload" style="font-weight:bold; font-size:25px">Upload image:</p>
 
-      <label for="models">Choose a model:</label>
+      <label for="models">Model:</label>
         <select name="models" id="models">
           <option value="Xception">Xception</option>
           <option value="VGG16">VGG16</option>
-          <option value="Efficienet">Efficienet</option>
+          <option value="Efficienet">Efficientnet</option>
           <option value="Nasnet">Nasnet</option>
         </select>
 
@@ -297,13 +318,15 @@
       <img id="selected-image" src=""/>
       <button id="predict-button">Predict</button>
       <br><br>
-      <p style="font-size:30px"><span id="loading"></span></p>
+      
       <div id = "left">
-        <p style="font-weight:bold; font-size:25px">Predictions:</p>    
-        <p>Male: <span id="male-prediction"></span></p>
-        <p>Female: <span id="female-prediction"></span></p>
-        <p>Number of patches extracted from image: <span id="patches-number"></span></p>
-        <p>Final classification: <span id="classification"></span></p>
+        
+        <p style="font-weight:bold; font-size:25px" id = "Predictions"></p>    
+        <p><span id="male-prediction"></span></p>
+        <p><span id="female-prediction"></span></p>
+        <p style="font-size:30px"><span id="loading"></span></p>
+        <p><span id="patches-number"></span></p>
+        <p><span id="classification"></span></p>
       </div>
     </div>
 
@@ -328,6 +351,7 @@
             $("#patches-number").text("");
             $("#classification").text("");
             x = document.getElementById("models").value;
+            $("#Predictions").text("");
             let message = {
                 image: base64Image,
                 model: x
@@ -335,10 +359,11 @@
             console.log(message);
             $.post("http://localhost:5000/predict", JSON.stringify(message), function(response){
                 $("#loading").text("");
-                $("#male-prediction").text(response.prediction.Male.toFixed(3));
-                $("#female-prediction").text(response.prediction.Female.toFixed(3));
-                $("#patches-number").text(response.prediction.patches_count);
-                $("#classification").text(response.prediction.classification);
+                $("#male-prediction").text("Male: " + response.prediction.Male.toFixed(3));
+                $("#female-prediction").text("Female: " + response.prediction.Female.toFixed(3));
+                $("#patches-number").text("Number of patches extracted from image: " + response.prediction.patches_count);
+                $("#classification").text("Final classification: " + response.prediction.classification);
+                $("#Predictions").text("Predictions:");
                 console.log(response);
             });
         });       
@@ -352,10 +377,13 @@
   <br>
   <div class="row">
     <div class="col-md-4">
-      <p>Fan? Drop a note.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
-      <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
+      <p>Ori Tabibi</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Beer-Sheva, IL</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> Email: Orita4@ac.sce.ac.il</p>
+      <br>
+      <p>Sean Assolin</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Dimona, IL</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> Email: shonas@ac.sce.ac.il</p>
     </div>
     <div class="col-md-8">
       <div class="row">
