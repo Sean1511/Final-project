@@ -7,10 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="croppie.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="croppie.js"></script>
   <style>
 
   body {
@@ -185,6 +183,20 @@
   #selected-image {
     width: 600px;
   }
+  canvas{
+    width: 600px !important;
+    height: 300px !important;
+  }
+  .light-modal-body{
+    background-color: #777 !important;
+  }
+  .light-modal-footer{
+    background-color: #777 !important;
+  }
+  .light-modal-close-btn{
+    background-color: #2d2d30 !important;
+  }
+
   </style>
 
 </head>
@@ -314,14 +326,14 @@
             <option value="Nasnet">Nasnet</option>
           </select>
 
-        <input id="image-selector" type="file">    
-        <br>
-        <img id="selected-image" src=""/>
-        <button id="predict-button">Predict</button>
+        <input id="cropzee-input" type="file" accept="image/*">
+        <label for="cropzee-input" class="image-previewer" data-cropzee="cropzee-input"></label>
+        <div>
+          <button id="predict-button">Predict</button>
+        </div>
         <br><br>
         
         <div id = "left">
-          
           <p style="font-weight:bold; font-size:25px" id = "Predictions"></p>    
           <p><span id="male-prediction"></span></p>
           <p><span id="female-prediction"></span></p>
@@ -330,25 +342,17 @@
           <p><span id="classification"></span></p>
         </div>
       </div>
-    
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>
-        let base64Image;
+   <script src="cropzee.js" defer ></script> 
+   <script>
+     $(document).ready(function(){
+      $("#cropzee-input").cropzee({startSize: [100, 100, '%'],
+      returnImageMode:'data-url',    
+    });
+      });
         let x;
-        $("#image-selector").change(function() {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let dataURL = reader.result;
-                $('#selected-image').attr("src", dataURL);
-                base64Image = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-                console.log(base64Image);
-            }
-            reader.readAsDataURL($("#image-selector")[0].files[0]);
-        });
         $("#predict-button").click(function(){
-          var img = document.getElementById('selected-image');
-          if (img.getAttribute('src') == ""){
+          const img = cropzeeGetImage('cropzee-input')
+          if (img == ""){
             $("#loading").text("Please upload image");
           }
           else{
@@ -360,10 +364,9 @@
             x = document.getElementById("models").value;
             $("#Predictions").text("");
             let message = {
-                image: base64Image,
+                image: img.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
                 model: x
             }
-            console.log(message);
             $.post("http://localhost:5000/predict", JSON.stringify(message), function(response){
                 $("#loading").text("");
                 $("#male-prediction").text("Male: " + response.prediction.Male.toFixed(3));
@@ -374,7 +377,7 @@
                 console.log(response);
             });
           }
-        });       
+      });       
     </script>
   </div>
 </div>
