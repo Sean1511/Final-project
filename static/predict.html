@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="croppie.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="croppie.js"></script>
   <style>
 
   body {
@@ -277,7 +279,7 @@
     <div class="col-sm-3">
       <p class="text-center"><strong>Ori Tabibi</strong></p><br>
       <a href="#demo3" data-toggle="collapse">
-        <img src="https://i.ibb.co/QpwJ6Hm/no.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+        <img src="https://i.ibb.co/jWR2NsS/ori.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
       </a>
       <div id="demo3" class="collapse">
         <p>Ori</p>
@@ -287,7 +289,7 @@
     <div class="col-sm-3">
         <p class="text-center"><strong>Sean Assolin</strong></p><br>
         <a href="#demo4" data-toggle="collapse">
-          <img src="https://i.ibb.co/HKpvbKn/sean1.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+          <img src="https://i.ibb.co/ZhPN1c9/sean.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
         </a>
         <div id="demo4" class="collapse">
           <p>Sean</p>
@@ -301,34 +303,34 @@
 <div id="tour" class="bg-1">
   <div class="container">
     <h3 class="text-center">PREDICTION</h3>
+      <div class="buttons">
+        <p id="upload" style="font-weight:bold; font-size:25px">Upload image:</p>
 
-    <div class="buttons">
-      <p id="upload" style="font-weight:bold; font-size:25px">Upload image:</p>
+        <label for="models">Model:</label>
+          <select name="models" id="models">
+            <option value="Xception">Xception</option>
+            <option value="VGG16">VGG16</option>
+            <option value="Efficienet">Efficientnet</option>
+            <option value="Nasnet">Nasnet</option>
+          </select>
 
-      <label for="models">Model:</label>
-        <select name="models" id="models">
-          <option value="Xception">Xception</option>
-          <option value="VGG16">VGG16</option>
-          <option value="Efficienet">Efficientnet</option>
-          <option value="Nasnet">Nasnet</option>
-        </select>
-
-      <input id="image-selector" type="file">    
-      <br>
-      <img id="selected-image" src=""/>
-      <button id="predict-button">Predict</button>
-      <br><br>
-      
-      <div id = "left">
+        <input id="image-selector" type="file">    
+        <br>
+        <img id="selected-image" src=""/>
+        <button id="predict-button">Predict</button>
+        <br><br>
         
-        <p style="font-weight:bold; font-size:25px" id = "Predictions"></p>    
-        <p><span id="male-prediction"></span></p>
-        <p><span id="female-prediction"></span></p>
-        <p style="font-size:30px"><span id="loading"></span></p>
-        <p><span id="patches-number"></span></p>
-        <p><span id="classification"></span></p>
+        <div id = "left">
+          
+          <p style="font-weight:bold; font-size:25px" id = "Predictions"></p>    
+          <p><span id="male-prediction"></span></p>
+          <p><span id="female-prediction"></span></p>
+          <p style="font-size:30px"><span id="loading"></span></p>
+          <p><span id="patches-number"></span></p>
+          <p><span id="classification"></span></p>
+        </div>
       </div>
-    </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
@@ -339,12 +341,17 @@
             reader.onload = function(e) {
                 let dataURL = reader.result;
                 $('#selected-image').attr("src", dataURL);
-                base64Image = dataURL.replace("data:image/png;base64,","");
+                base64Image = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
                 console.log(base64Image);
             }
             reader.readAsDataURL($("#image-selector")[0].files[0]);
         });
         $("#predict-button").click(function(){
+          var img = document.getElementById('selected-image');
+          if (img.getAttribute('src') == ""){
+            $("#loading").text("Please upload image");
+          }
+          else{
             $("#loading").text("Processing image...");
             $("#male-prediction").text("");
             $("#female-prediction").text("");
@@ -366,6 +373,7 @@
                 $("#Predictions").text("Predictions:");
                 console.log(response);
             });
+          }
         });       
     </script>
   </div>
