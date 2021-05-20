@@ -107,7 +107,7 @@ def predict_image(image, model, preprocess_func, scale):
     print('female score : ', f_score/patches_count)
     print('classification : {0}'.format('MALE' if m_score > f_score else 'FEMALE'))
     print()
-    return m_score/patches_count, f_score/patches_count, patches_count, ('classification : {0}'.format('MALE' if m_score > f_score else 'FEMALE'))
+    return m_score/patches_count, f_score/patches_count, patches_count, ('{0}'.format('MALE' if m_score > f_score else 'FEMALE'))
 
 
 @app.route("/predict", methods=["POST"])
@@ -128,8 +128,8 @@ def predict():
 
     response = {
         'prediction': {
-            'Male': prediction[0],
-            'Female': prediction[1], 
+            'Male': prediction[0]*100,
+            'Female': prediction[1]*100, 
             'patches_count': prediction[2],
             'classification': prediction[3]
         }

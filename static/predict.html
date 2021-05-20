@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -181,8 +182,8 @@
             }
             $.post("http://localhost:5000/predict", JSON.stringify(message), function(response){
                 $("#loading").text("");
-                $("#male-prediction").text("Male: " + response.prediction.Male.toFixed(3));
-                $("#female-prediction").text("Female: " + response.prediction.Female.toFixed(3));
+                $("#male-prediction").text("Male: " + response.prediction.Male.toFixed(0) + "%");
+                $("#female-prediction").text("Female: " + response.prediction.Female.toFixed(0) +"%");
                 $("#patches-number").text("Number of patches extracted from image: " + response.prediction.patches_count);
                 $("#classification").text("Final classification: " + response.prediction.classification);
                 $("#Predictions").text("Predictions:");
@@ -212,28 +213,35 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-sm-6 form-group">
-            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+            <input class="form-control" id="name" name="name" placeholder="Your name" type="text" required>
           </div>
           <div class="col-sm-6 form-group">
-            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            <input class="form-control" id="email" name="email" placeholder="Your email" type="email" required>
           </div>
         </div>
-        <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+        <textarea class="form-control" id="comments" name="comments" placeholder="Leave your comment here" rows="5"></textarea>
         <br>
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="http://localhost:5000/static/predict.html#contact">
-        <input type="hidden" name="_cc" value="orita4@ac.sce.ac.il">
+        
         <div class="row">
           <div class="col-md-12 form-group">
-            <button onclick="thanks()" class="btn pull-right" type="submit">Send</button>
+            <button onclick="alert()" class="btn pull-right" type="submit">Send</button>
           </div>
           <script>
-            function thanks() {
-              alert("Thank you for your email, we will reply as soon as possible");
+            function alert() {
+              swal({
+                title: "The email was sent successfully!",
+                text: "We will reply as soon as possible",
+                icon: "success",
+                buttons: false,
+              });
             }
           </script>
         </div>
       </div>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="http://localhost:5000/static/predict.html#contact">
+      <input type="hidden" name="_template" value="box">
+      <!-- <input type="hidden" name="_cc" value="orita4@ac.sce.ac.il"> -->
     </form>
   </div>
 </div>
