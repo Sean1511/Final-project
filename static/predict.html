@@ -223,25 +223,28 @@
         
         <div class="row">
           <div class="col-md-12 form-group">
-            <button onclick="alert_box()" class="btn pull-right" type="submit">Send</button>
+            <button class="btn pull-right" type="submit">Send</button>
           </div>
-          <script>
-            function alert_box() {
-              // alert("The email was sent successfully!");
-              swal({
-                title: "The email was sent successfully!",
-                text: "We will reply as soon as possible",
-                icon: "success",
-                buttons: "OK",
-              });
-            }
-          </script>
+          
         </div>
       </div>
       <input type="hidden" name="_captcha" value="true">
       <input type="hidden" name="_next" value="http://localhost:5000/static/predict.html#contact">
       <input type="hidden" name="_template" value="box">
-      <!-- <input type="hidden" name="_cc" value="orita4@ac.sce.ac.il"> -->
+      <input type="hidden" name="_cc" value="orita4@ac.sce.ac.il">
+      <script>
+        window.addEventListener("load", ()=> {
+          const {hash} = window.location
+          if (hash == "#contact"){
+            swal({
+              title: "The email was sent successfully!",
+              text: "We will reply as soon as possible",
+              icon: "success",
+              buttons: "OK",
+            });
+          }
+        })
+      </script>
     </form>
   </div>
 </div>
