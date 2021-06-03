@@ -24,6 +24,5 @@ In order to run this project on local environment please follow this steps:
 5. Enjoy the application.
 
 # Project Setup and Run
-<iframe width="420" height="315"
 src="https://www.youtube.com/watch?v=QpLx9SxZgdI">
-</iframe>
+
