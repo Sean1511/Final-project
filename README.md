@@ -19,4 +19,5 @@ In order to run this project on local environment please follow this steps:
 3. Run the app by : <br> 
 3.1. On Linux(bash) - export FLASK_APP=predict_app.py and flask run --host=0.0.0.0 <br>
 3.2. On Windows(cmd) - set FLASK_APP=predict_app.py and flask run --host=0.0.0.0 <br>
-4. Enjoy the application.
+4. Copy this link to your browser http://localhost:5000/static/predict.html <br>
+5. Enjoy the application.
