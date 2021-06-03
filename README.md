@@ -9,4 +9,14 @@ We perform extensive experiments, analyze and compare the results obtained with 
 In this website you will be able to upload handwritting images and get an automatically gender classification. 
 
 # Project Research
-In order to understand the steps and what we did you are welcome to look at the <a href="Documentation/project_book.pdf" >Project book</a>
+In order to understand the steps and what we did you are welcome to look at the <a href="Documentation/project_book.pdf" >Project book.</a>
+
+# Project Setup and Run
+In order to run this project on local environment please follow this steps:
+
+1. Clone this repository.
+2. Install the requirements file - pip install -r requirements.txt
+3. Run the app by : 
+3.1. On Linux(bash) - export FLASK_APP=predict_app.py and flask run --host=0.0.0.0 
+3.2. On Windows(cmd) - set FLASK_APP=predict_app.py and flask run --host=0.0.0.0 
+4. Enjoy the application.
