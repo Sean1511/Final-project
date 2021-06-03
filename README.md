@@ -16,7 +16,7 @@ In order to run this project on local environment please follow this steps:
 
 1. Clone this repository.
 2. Install the requirements file - pip install -r requirements.txt
-3. Run the app by : 
-3.1. On Linux(bash) - export FLASK_APP=predict_app.py and flask run --host=0.0.0.0 
-3.2. On Windows(cmd) - set FLASK_APP=predict_app.py and flask run --host=0.0.0.0 
+3. Run the app by : <br> 
+3.1. On Linux(bash) - export FLASK_APP=predict_app.py and flask run --host=0.0.0.0 <br>
+3.2. On Windows(cmd) - set FLASK_APP=predict_app.py and flask run --host=0.0.0.0 <br>
 4. Enjoy the application.
