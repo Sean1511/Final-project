@@ -22,3 +22,8 @@ In order to run this project on local environment please follow this steps:
 3.2. On Windows(cmd) - set FLASK_APP=predict_app.py and flask run --host=0.0.0.0 <br>
 4. Copy this link to your browser http://localhost:5000/static/predict.html <br>
 5. Enjoy the application.
+
+# Project Setup and Run
+<iframe width="420" height="315"
+src="https://www.youtube.com/watch?v=QpLx9SxZgdI">
+</iframe>
