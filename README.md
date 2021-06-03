@@ -7,3 +7,6 @@ In this work, we study an application of deep neural networks for gender classif
 The study was performed on two datasets, the QUWI dataset, consisting of handwritten documents in English and Arabic, and a new dataset of documents in Hebrew script.<br>
 We perform extensive experiments, analyze and compare the results obtained with different neural networks. We also compare the obtained results against human-level performance.<br>
 In this website you will be able to upload handwritting images and get an automatically gender classification. 
+
+# Project Research
+In order to understand the steps and what we did you are welcome to look at the <a href="Documentation/project_book.pdf" >Project book</a>
