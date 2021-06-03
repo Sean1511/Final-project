@@ -9,7 +9,7 @@ We perform extensive experiments, analyze and compare the results obtained with 
 In this website you will be able to upload handwritting images and get an automatically gender classification. 
 
 # Project Research
-In order to understand the steps and what we did you are welcome to look at the <a href="Documentation/project_book.pdf" >project book</a> or the <a href="Documentation/project_book.pdf" >acadmic paper.</a> 
+In order to understand the steps and what we did you are welcome to look at the <a href="Documentation/project_book.pdf" >project book</a> or the <a href="Documentation/acadmic_paper.pdf" >acadmic paper.</a> 
 
 
 # Project Setup and Run
