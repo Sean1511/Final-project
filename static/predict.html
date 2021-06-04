@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -154,7 +154,7 @@
           <p><span id="classification"></span></p>
         </div>
       </div>
-   <script src="cropzee.js" defer ></script> 
+   <script src="/static/cropzee.js" defer ></script> 
    <script>
      $(document).ready(function(){
       $("#cropzee-input").cropzee({startSize: [100, 100, '%'],
@@ -229,7 +229,7 @@
         </div>
       </div>
       <input type="hidden" name="_captcha" value="true">
-      <input type="hidden" name="_next" value="http://localhost:5000/static/predict.html#contact">
+      <input type="hidden" name="_next" value="http://localhost:5000/#contact">
       <input type="hidden" name="_template" value="box">
       <input type="hidden" name="_cc" value="orita4@ac.sce.ac.il">
       <script>

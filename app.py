@@ -1,4 +1,6 @@
 from tensorflow.keras.models import load_model
+from flask import render_template
+from flask_cors import CORS
 import cv2
 import base64
 import io
@@ -9,7 +11,8 @@ from flask import request
 from flask import jsonify
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='static')
+CORS(app)
 
 FEMALE = 0
 MALE = 1
@@ -109,6 +112,9 @@ def predict_image(image, model, preprocess_func, scale):
     print()
     return m_score/patches_count, f_score/patches_count, patches_count, ('{0}'.format('MALE' if m_score > f_score else 'FEMALE'))
 
+@app.route("/")
+def index():
+    return render_template("predict.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
