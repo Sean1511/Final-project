@@ -176,7 +176,7 @@
                 image: img.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
                 model: x
             }
-            $.post("http://localhost:5000/predict", JSON.stringify(message), function(response){
+            $.post(window.location.origin + "/predict", JSON.stringify(message), function(response){
                 $("#loading").text("");
                 $("#male-prediction").text("Male: " + response.prediction.Male.toFixed(0) + "%");
                 $("#female-prediction").text("Female: " + response.prediction.Female.toFixed(0) +"%");
