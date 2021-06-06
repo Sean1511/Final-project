@@ -30,7 +30,7 @@ jQuery.fn.extend({
         // see https://hunzaboy.github.io/Light-Modal/#
         modalAnimation: '',
         // cropzee options
-        allowedInputs: ['gif','png','jpg','jpeg'], // input extensions supported
+        allowedInputs: ['png','jpg','jpeg'], // input extensions supported
         imageExtension: 'image/jpeg', // cropped image/blob file-type 'image/jpeg' | 'image/png' | any other supported by browser
         returnImageMode: 'data-url', // image data mode, 'blob' for blob object or 'data-url' for dataURL
     }) {
@@ -38,7 +38,7 @@ jQuery.fn.extend({
             options.aspectRatio = null;
         }
         if (!options.allowedInputs) {
-            options.allowedInputs = ['gif','png','jpg','jpeg'];
+            options.allowedInputs = ['png','jpg','jpeg'];
         }
         if (!options.imageExtension) {
             options.imageExtension = 'image/jpeg';
@@ -55,7 +55,20 @@ jQuery.fn.extend({
         // it takes in the input id to return data for specific input
         // it returns dataURL or blob
         window.cropzeeGetImage = function(id) {
-            return cropzeeReturnImage[id];
+            try {
+                return cropzeeReturnImage[id];
+            }
+            catch (e) {
+                if (e instanceof ReferenceError) {
+                    swal({
+                        title: "Image error!",
+                        text: "Please upload image",
+                        icon: "error",
+                        buttons: "OK",
+                    });
+                }
+                return null
+            }
         }
         // function to rotate image in modal, taking in input id
         // it disables croppr, creates a new image object after rotating the canvas then initializes croppr again
@@ -253,7 +266,12 @@ jQuery.fn.extend({
             $(this).one("change", function(){
                 var ext = $('#' + cropzeeInputId).val().split('.').pop().toLowerCase();
                 if($.inArray(ext, options.allowedInputs) == -1) {
-                    alert('invalid extension! Please check your input file and try again.');
+                    swal({
+                        title: "Input error!",
+                        text: "Allowed extensions are : JPEG | JPG | PNG only!",
+                        icon: "error",
+                        buttons: "OK",
+                      });
                     resetFileInput(cropzeeInputId);
                 } else {
                     var previewerId = $('[data-cropzee="' + cropzeeInputId + '"]').attr("id");

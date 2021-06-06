@@ -86,7 +86,24 @@ def select_model(name):
 def load_default_settings():
     return current_model, model, preprocess_func, scale
 
+def check_image_size(image):
+    """resize image to proper resolution before making patches"""
+    y = len(image)  # y is height
+    x = len(image[0])  # x is width
+    print(x, y)
+    if y > 3000 or x > 3000:
+        new_x = int(x * (2 / 3))
+        new_y = int(y * (2/ 3))
+        image = cv2.resize(image, (new_x, new_y))
+    elif y > 2500 or x > 2500:
+        new_x = int(x * (2.3 / 3))
+        new_y = int(y * (2.3 / 3))
+        image = cv2.resize(image, (new_x, new_y))
+    print(len(image[0]), len(image))
+    return image
+
 def predict_image(image, model, preprocess_func, scale):
+    image = check_image_size(image)
     patches = image_segment(image)   # extract patches from image
     if len(patches) % 2 == 0 : patches.append(rand_patch(image)) # if number of patches is even, add 1 random patch to make it odd
     x_test = []

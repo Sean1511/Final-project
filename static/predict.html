@@ -164,10 +164,7 @@
         let x;
         $("#predict-button").click(function(){
           const img = cropzeeGetImage('cropzee-input')
-          if (img == ""){
-            $("#loading").text("Please upload image");
-          }
-          else{
+          if (img != null){
             $("#loading").text("Processing image...");
             $("#male-prediction").text("");
             $("#female-prediction").text("");
@@ -186,7 +183,6 @@
                 $("#patches-number").text("Number of patches extracted from image: " + response.prediction.patches_count);
                 $("#classification").text("Final identification: " + response.prediction.classification);
                 $("#Predictions").text("Predictions:");
-                console.log(response);
             });
           }
       });       

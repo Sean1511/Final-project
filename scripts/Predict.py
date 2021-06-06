@@ -120,11 +120,11 @@ def check_image_size(image):
     if y > 3000 or x > 3000:
         new_x = int(x * (2 / 3))
         new_y = int(y * (2/ 3))
-        image = cv2.resize(image, (new_y, new_x))
+        image = cv2.resize(image, (new_x, new_y))
     elif y > 2500 or x > 2500:
         new_x = int(x * (2.3 / 3))
         new_y = int(y * (2.3 / 3))
-        image = cv2.resize(image, (new_y, new_x))
+        image = cv2.resize(image, (new_x, new_y))
     print(len(image[0]), len(image))
     return image
 
