@@ -22,6 +22,6 @@ In order to run this project on local environment please follow this steps:
 5. Enjoy the application.
 
 # Website demo
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/QpLx9SxZgdI/0.jpg)](https://www.youtube.com/watch?v=QpLx9SxZgdI)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/SF8ky21ihM0/0.jpg)](https://www.youtube.com/watch?v=SF8ky21ihM0)
 
 
